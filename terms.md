@@ -1,6 +1,6 @@
 # Conditions d’utilisation et de vente — Itadaki.app
 
-**Dernière mise à jour :** 17/02/2026
+**Dernière mise à jour :** 27/02/2026
 
 Ces conditions encadrent l’utilisation de l’application Itadaki.app (les “Services”) ainsi que l’achat d’abonnements via Google Play.
 
@@ -36,8 +36,8 @@ L’application peut afficher de la **publicité non personnalisée**. Selon la 
 ### 7.1 Offres et prix
 Les prix sont affichés dans Google Play avant achat.  
 Offres actuelles :
-- **Abonnement mensuel : 3,99 € / mois**
-- **Abonnement annuel : 29,99 € / an**
+- **Abonnement mensuel : 1,99 € / mois**
+- **Abonnement annuel : 13,99 € / an**
 
 Les prix peuvent évoluer ; le prix applicable est celui affiché par Google Play au moment de l’achat ou du renouvellement.
 
