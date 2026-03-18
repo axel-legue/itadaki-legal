@@ -24,64 +24,73 @@
             background: var(--background);
             color: var(--text-main);
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* --- Header --- */
+        /* --- Header Simplifié --- */
         header {
-            padding: 2rem 5%;
+            padding: 3rem 5% 1rem;
             display: flex;
-            justify-content: center; /* Centré car plus de menu */
+            justify-content: center;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
             color: var(--text-main);
             font-weight: 800;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             letter-spacing: -0.5px;
         }
 
+        /* Correction du bug de l'icône : dimensions fixes et objet-fit */
         .logo img {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
+            object-fit: cover;
+            background-color: var(--surface);
             box-shadow: 0 4px 12px rgba(160, 77, 77, 0.15);
+            display: block;
         }
 
         /* --- Hero Section --- */
+        main { flex: 1; }
+
         .hero {
-            padding: 60px 5% 80px;
-            max-width: 900px;
+            padding: 60px 5% 60px;
+            max-width: 850px;
             margin: 0 auto;
             text-align: center;
             animation: fadeInUp 0.8s ease-out;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 7vw, 4.2rem);
             line-height: 1.05;
             margin-bottom: 1.5rem;
             font-weight: 800;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
         }
 
         h1 span { color: var(--primary); }
 
         .tagline {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
-            margin-bottom: 3rem;
-            max-width: 650px;
+            margin-bottom: 3.5rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .btn-primary {
-            padding: 1.2rem 2.5rem;
-            border-radius: 18px;
+            padding: 1.2rem 2.8rem;
+            border-radius: 20px;
             text-decoration: none;
             font-weight: 700;
             display: inline-flex;
@@ -103,14 +112,14 @@
         .features-grid {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 5% 100px;
+            padding: 20px 5% 100px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .feature-card {
-            padding: 40px;
+            padding: 40px 30px;
             border-radius: var(--radius);
             background: var(--surface);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -125,8 +134,8 @@
         }
 
         .icon-box {
-            font-size: 3rem;
-            margin-bottom: 24px;
+            font-size: 3.2rem;
+            margin-bottom: 20px;
             display: block;
         }
 
@@ -138,42 +147,42 @@
 
         .feature-card p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         /* --- Footer --- */
         footer {
-            padding: 80px 5% 40px;
+            padding: 60px 5% 40px;
             text-align: center;
+            background: white;
             border-top: 1px solid rgba(160, 77, 77, 0.1);
         }
 
-        .footer-links { margin-bottom: 24px; }
+        .footer-links { margin-bottom: 20px; }
         .footer-links a {
-            margin: 0 15px;
+            margin: 0 12px;
             text-decoration: none;
             color: var(--text-main);
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+            font-size: 0.9rem;
         }
 
         .footer-links a:hover { color: var(--primary); }
 
         .copyright {
             color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 20px;
+            font-size: 0.8rem;
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.8rem; }
-            .feature-card { padding: 30px; }
+            header { padding-top: 2rem; }
+            .feature-card { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -181,38 +190,38 @@
 
 <header>
     <a href="#" class="logo">
-        <img src="icon.webp" alt="Itadaki" onerror="this.src='https://via.placeholder.com/42'">
+        <img src="icon.webp" alt="Itadaki" width="48" height="48">
         Itadaki
     </a>
 </header>
 
 <main>
     <section class="hero">
-        <h1>Cuisinez mieux,<br><span>stressez moins.</span></h1>
+        <h1>Organisez vos repas,<br><span>savourez l'instant.</span></h1>
         <p class="tagline">
-            L'assistant culinaire qui transforme le chaos des courses en un moment de plaisir. Organisez vos recettes et planifiez votre semaine en un clin d'œil.
+            L'application intuitive pour planifier vos recettes et simplifier vos courses, sans aucun stress.
         </p>
         <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-primary">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
-            Obtenir l'application
+            Disponible sur Google Play
         </a>
     </section>
 
     <div class="features-grid">
         <div class="feature-card">
             <span class="icon-box">📚</span>
-            <h3>Bibliothèque</h3>
-            <p>Importez vos recettes préférées du web et gardez-les toujours à portée de main.</p>
+            <h3>Recettes</h3>
+            <p>Rassemblez vos plats préférés au même endroit, accessibles partout.</p>
         </div>
         <div class="feature-card">
             <span class="icon-box">📅</span>
             <h3>Planning</h3>
-            <p>Organisez vos repas de la semaine pour ne plus jamais vous demander "Qu'est-ce qu'on mange ?".</p>
+            <p>Anticipez votre semaine pour gagner du temps chaque soir.</p>
         </div>
         <div class="feature-card">
             <span class="icon-box">🛒</span>
             <h3>Courses</h3>
-            <p>Une liste intelligente générée automatiquement selon vos besoins réels.</p>
+            <p>Générez votre liste en un clic selon votre planning de la semaine.</p>
         </div>
     </div>
 </main>
@@ -223,7 +232,7 @@
         <a href="legal.html">Mentions Légales</a>
         <a href="mailto:itadaki.app@gmail.com">Contact</a>
     </div>
-    <p class="copyright">&copy; 2026 Itadaki. Cuisiné avec passion.</p>
+    <p class="copyright">&copy; 2026 Itadaki. Tous droits réservés.</p>
 </footer>
 
 </body>
