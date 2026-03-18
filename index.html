@@ -3,21 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itadaki — Cuisinez avec sérénité</title>
+    <title>Itadaki — Planifiez vos repas et simplifiez vos courses | App Android</title>
+    <meta name="description" content="Itadaki organise vos recettes, planifie votre menu de la semaine et génère votre liste de courses automatiquement. Gratuit sur Android.">
+    <link rel="canonical" href="https://itadaki.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Itadaki — Planifiez vos repas et simplifiez vos courses">
+    <meta property="og:description" content="Organisez vos recettes, planifiez votre semaine et générez votre liste de courses en un clic. Gratuit sur Android.">
+    <meta property="og:image" content="https://itadaki.app/og-image.png">
+    <meta property="og:url" content="https://itadaki.app/">
+    <meta property="og:site_name" content="Itadaki">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Itadaki — Planifiez vos repas et simplifiez vos courses">
+    <meta name="twitter:description" content="Organisez vos recettes, planifiez votre semaine et générez votre liste de courses en un clic.">
+    <meta name="twitter:image" content="https://itadaki.app/og-image.png">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Itadaki",
+        "operatingSystem": "Android",
+        "applicationCategory": "LifestyleApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "url": "https://play.google.com/store/apps/details?id=com.axel.legue.itadaki",
+        "description": "Application de planification de repas et liste de courses intelligente."
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary: #A04D4D;
             --primary-dark: #7A3B3B;
+            --primary-light: #C4736F;
             --accent: #E9967A;
             --background: #FCF9F7;
             --surface: #FFFFFF;
             --text-main: #2D2424;
             --text-muted: #6B5E5E;
+            --shadow-sm: 0 4px 12px rgba(160, 77, 77, 0.08);
             --shadow: 0 10px 30px rgba(160, 77, 77, 0.08);
+            --shadow-lg: 0 20px 50px rgba(160, 77, 77, 0.12);
             --radius: 24px;
+            --radius-sm: 16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
@@ -29,142 +75,365 @@
             min-height: 100vh;
         }
 
-        /* --- Header Simplifié --- */
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        }
+
+        /* --- Header Sticky --- */
         header {
-            padding: 3rem 5% 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 5%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(252, 249, 247, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(160, 77, 77, 0.06);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             text-decoration: none;
             color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             letter-spacing: -0.5px;
         }
 
-        /* Correction du bug de l'icône : dimensions fixes et objet-fit */
         .logo img {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             object-fit: cover;
-            background-color: var(--surface);
-            box-shadow: 0 4px 12px rgba(160, 77, 77, 0.15);
+            box-shadow: 0 2px 8px rgba(160, 77, 77, 0.15);
             display: block;
+        }
+
+        .btn-header {
+            padding: 0.7rem 1.6rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-header:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(160, 77, 77, 0.25);
         }
 
         /* --- Hero Section --- */
         main { flex: 1; }
 
         .hero {
-            padding: 60px 5% 60px;
-            max-width: 850px;
+            padding: 80px 5% 60px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
             animation: fadeInUp 0.8s ease-out;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 7vw, 4.2rem);
-            line-height: 1.05;
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 3.8rem);
+            line-height: 1.1;
             margin-bottom: 1.5rem;
             font-weight: 800;
             letter-spacing: -0.04em;
         }
 
-        h1 span { color: var(--primary); }
+        .hero h1 span { color: var(--primary); }
 
-        .tagline {
-            font-size: 1.3rem;
+        .hero-tagline {
+            font-size: 1.2rem;
             color: var(--text-muted);
-            margin-bottom: 3.5rem;
-            max-width: 600px;
+            margin-bottom: 2.5rem;
+            max-width: 620px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
         }
 
         .btn-primary {
-            padding: 1.2rem 2.8rem;
-            border-radius: 20px;
+            padding: 1.1rem 2.5rem;
+            border-radius: 18px;
             text-decoration: none;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: var(--primary);
             color: white;
             box-shadow: 0 10px 25px rgba(160, 77, 77, 0.25);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.05rem;
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             background: var(--primary-dark);
             box-shadow: 0 15px 35px rgba(160, 77, 77, 0.35);
         }
 
-        /* --- Features --- */
-        .features-grid {
+        .hero-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(160, 77, 77, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -15%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(233, 150, 122, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* --- Section Titles --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* --- How it works --- */
+        .how-it-works {
+            padding: 80px 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Features Grid --- */
+        .features {
+            padding: 60px 5% 80px;
             max-width: 1100px;
             margin: 0 auto;
-            padding: 20px 5% 100px;
+        }
+
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
         }
 
         .feature-card {
-            padding: 40px 30px;
+            padding: 36px 28px;
             border-radius: var(--radius);
             background: var(--surface);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
             border: 1px solid rgba(160, 77, 77, 0.05);
-            text-align: center;
         }
 
         .feature-card:hover {
-            transform: translateY(-12px);
+            transform: translateY(-8px);
             border-color: var(--accent);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
         }
 
-        .icon-box {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
+        .feature-icon {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
             display: block;
         }
 
-        .feature-card h3 { 
-            margin-bottom: 12px; 
-            font-size: 1.4rem;
+        .feature-card h3 {
+            font-size: 1.15rem;
             font-weight: 700;
+            margin-bottom: 10px;
         }
 
         .feature-card p {
             color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Premium Banner --- */
+        .premium {
+            padding: 80px 5%;
+        }
+
+        .premium-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius);
+            padding: 60px 50px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(122, 59, 59, 0.25);
+        }
+
+        .premium-inner h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .premium-list {
+            list-style: none;
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 2rem;
             font-size: 1.05rem;
+            line-height: 2;
+        }
+
+        .premium-list li::before {
+            content: '✓ ';
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        .btn-white {
+            padding: 1rem 2.2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Final CTA --- */
+        .final-cta {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
         }
 
         /* --- Footer --- */
         footer {
-            padding: 60px 5% 40px;
+            padding: 50px 5% 30px;
             text-align: center;
             background: white;
-            border-top: 1px solid rgba(160, 77, 77, 0.1);
+            border-top: 1px solid rgba(160, 77, 77, 0.08);
+        }
+
+        .footer-tagline {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
         }
 
         .footer-links { margin-bottom: 20px; }
         .footer-links a {
-            margin: 0 12px;
+            margin: 0 14px;
             text-decoration: none;
             color: var(--text-main);
             font-weight: 600;
             font-size: 0.9rem;
+            transition: color 0.2s ease;
         }
 
         .footer-links a:hover { color: var(--primary); }
@@ -174,15 +443,74 @@
             font-size: 0.8rem;
         }
 
+        /* --- Animations --- */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2.8rem; }
-            header { padding-top: 2rem; }
-            .feature-card { padding: 30px 20px; }
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 0.8rem 5%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo img {
+                width: 34px;
+                height: 34px;
+            }
+
+            .btn-header {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 50px 5% 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.05rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .step {
+                padding: 20px 16px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 28px 22px;
+            }
+
+            .premium-inner {
+                padding: 40px 24px;
+            }
+
+            .premium-list {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -190,49 +518,132 @@
 
 <header>
     <a href="#" class="logo">
-        <img src="icon.webp" alt="Itadaki" width="48" height="48">
+        <img src="icon.webp" alt="Itadaki — application de planification de repas" width="40" height="40">
         Itadaki
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
+        Télécharger
     </a>
 </header>
 
 <main>
-    <section class="hero">
-        <h1>Organisez vos repas,<br><span>savourez l'instant.</span></h1>
-        <p class="tagline">
-            L'application intuitive pour planifier vos recettes et simplifier vos courses, sans aucun stress.
+    <!-- Hero -->
+    <section class="hero hero-bg">
+        <h1>Planifiez vos repas,<br><span>savourez</span> chaque instant.</h1>
+        <p class="hero-tagline">
+            Fini le stress du &laquo;&nbsp;qu'est-ce qu'on mange ce soir&nbsp;?&nbsp;&raquo;. Itadaki organise vos recettes, planifie votre semaine et génère votre liste de courses en un clic.
         </p>
-        <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-primary">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
-            Disponible sur Google Play
-        </a>
+        <div class="hero-cta">
+            <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-primary">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
+                Disponible sur Google Play
+            </a>
+            <p class="hero-note">Gratuit &middot; Version Premium disponible</p>
+        </div>
     </section>
 
-    <div class="features-grid">
-        <div class="feature-card">
-            <span class="icon-box">📚</span>
-            <h3>Recettes</h3>
-            <p>Rassemblez vos plats préférés au même endroit, accessibles partout.</p>
+    <!-- Comment ça marche -->
+    <section class="how-it-works">
+        <div class="section-title">
+            <h2>Comment ça marche</h2>
+            <p>Trois étapes pour des repas organisés, sans prise de tête.</p>
         </div>
-        <div class="feature-card">
-            <span class="icon-box">📅</span>
-            <h3>Planning</h3>
-            <p>Anticipez votre semaine pour gagner du temps chaque soir.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Ajoutez vos recettes</h3>
+                <p>Importez depuis le web, Instagram, TikTok, ou photographiez un plat et laissez l'IA faire le reste.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Planifiez votre semaine</h3>
+                <p>Générez un menu automatique, choisissez parmi 4 modes de planification et verrouillez vos repas préférés.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Faites vos courses</h3>
+                <p>Votre liste se génère automatiquement, ingrédients regroupés par rayon. Plus rien à oublier.</p>
+            </div>
         </div>
-        <div class="feature-card">
-            <span class="icon-box">🛒</span>
-            <h3>Courses</h3>
-            <p>Générez votre liste en un clic selon votre planning de la semaine.</p>
+    </section>
+
+    <!-- Fonctionnalités -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Tout ce qu'il vous faut</h2>
+            <p>Des fonctionnalités pensées pour simplifier votre quotidien en cuisine.</p>
         </div>
-    </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">&#x1F310;</span>
+                <h3>Import intelligent</h3>
+                <p>Importez des recettes depuis n'importe quel site web, Instagram, TikTok, ou par photo grâce à l'IA.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">&#x1F4C5;</span>
+                <h3>Planification flexible</h3>
+                <p>4 modes de planification, verrouillage de repas, et génération automatique de menus adaptés à vos envies.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">&#x1F6D2;</span>
+                <h3>Liste de courses intelligente</h3>
+                <p>Agrégation automatique des ingrédients, classement par rayon, et partage en PDF.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">&#x1F468;&#x200D;&#x1F373;</span>
+                <h3>Mode cuisine pas à pas</h3>
+                <p>Suivez vos recettes étape par étape avec minuteurs intégrés et écran toujours allumé.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">&#x2601;&#xFE0F;</span>
+                <h3>Vos données, partout</h3>
+                <p>Sauvegardez sur Google Drive ou WebDAV, exportez en format .itk pour ne rien perdre.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">&#x2B50;</span>
+                <h3>Organisez à votre façon</h3>
+                <p>Notes, catégories, mots-clés, ajustement des portions : personnalisez chaque recette.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium -->
+    <section class="premium">
+        <div class="premium-inner">
+            <h2>Libérez tout le potentiel d'Itadaki</h2>
+            <ul class="premium-list">
+                <li>Import illimité de recettes web et réseaux sociaux</li>
+                <li>Import par photo avec reconnaissance IA</li>
+                <li>Sauvegarde cloud Google Drive et WebDAV</li>
+                <li>Export et partage de listes de courses en PDF</li>
+                <li>Mots-clés et filtres avancés</li>
+            </ul>
+            <br>
+            <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-white">
+                Découvrir Premium
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="final-cta">
+        <h2>Prêt à simplifier vos repas ?</h2>
+        <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-primary">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
+            Télécharger sur Google Play
+        </a>
+    </section>
 </main>
 
 <footer>
+    <p class="footer-tagline">Fait avec &#10084;&#65039; pour les gourmets organisés</p>
     <div class="footer-links">
         <a href="privacy.html">Confidentialité</a>
         <a href="legal.html">Mentions Légales</a>
         <a href="mailto:itadaki.app@gmail.com">Contact</a>
     </div>
-    <p class="copyright">&copy; 2026 Itadaki. Tous droits réservés.</p>
+    <p class="copyright">&copy; 2025 Itadaki. Tous droits réservés.</p>
 </footer>
 
 </body>
