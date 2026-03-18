@@ -15,4 +15,4 @@ Itadaki.app
 
 ## Contact
 
-contact@itadakiapp.com
+itadaki.app@gmail.com
