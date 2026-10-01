@@ -3,648 +3,1133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itadaki — Planifiez vos repas et simplifiez vos courses | App Android</title>
-    <meta name="description" content="Itadaki organise vos recettes, planifie votre menu de la semaine et génère votre liste de courses automatiquement. Gratuit sur Android.">
+    <title>Itadaki — Menus de la semaine et liste de courses | App Android</title>
+    <meta name="description" content="Itadaki génère le menu de la semaine à partir de vos recettes, prépare la liste de courses classée par rayon et vous rappelle le dîner du soir. Gratuit et sans publicité sur Android.">
+    <meta name="theme-color" content="#924848">
     <link rel="canonical" href="https://itadaki.app/">
+    <link rel="icon" href="icon.webp" type="image/webp">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:title" content="Itadaki — Planifiez vos repas et simplifiez vos courses">
-    <meta property="og:description" content="Organisez vos recettes, planifiez votre semaine et générez votre liste de courses en un clic. Gratuit sur Android.">
+    <meta property="og:title" content="Itadaki — Menus de la semaine et liste de courses">
+    <meta property="og:description" content="Le menu de la semaine en un clic, la liste de courses qui se fait toute seule, un rappel pour le dîner. Gratuit et sans pub sur Android.">
     <meta property="og:image" content="https://itadaki.app/og-image.png">
     <meta property="og:url" content="https://itadaki.app/">
     <meta property="og:site_name" content="Itadaki">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Itadaki — Planifiez vos repas et simplifiez vos courses">
-    <meta name="twitter:description" content="Organisez vos recettes, planifiez votre semaine et générez votre liste de courses en un clic.">
+    <meta name="twitter:title" content="Itadaki — Menus de la semaine et liste de courses">
+    <meta name="twitter:description" content="Le menu de la semaine en un clic, la liste de courses qui se fait toute seule. Gratuit et sans pub sur Android.">
     <meta name="twitter:image" content="https://itadaki.app/og-image.png">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Itadaki",
+        "@type": "MobileApplication",
+        "name": "Itadaki : menus et courses",
         "operatingSystem": "Android",
         "applicationCategory": "LifestyleApplication",
+        "inLanguage": ["fr", "en"],
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "EUR"
         },
-        "url": "https://play.google.com/store/apps/details?id=com.axel.legue.itadaki",
-        "description": "Application de planification de repas et liste de courses intelligente."
+        "url": "https://itadaki.app/",
+        "downloadUrl": "https://play.google.com/store/apps/details?id=com.axel.legue.itadaki",
+        "description": "Génération du menu de la semaine à partir de vos recettes, liste de courses automatique classée par rayon, rappel du soir et widget. Sans publicité."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": "Itadaki est-il gratuit ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. La planification, les listes de courses, le placard, le rappel du soir, le widget, l'ajustement des portions, l'export PDF et la sauvegarde par fichier sont gratuits et sans limite. Itadaki Pro ajoute les imports illimités, le regroupement des doublons, le Mode Cuisine et la synchronisation Google Drive."}},
+            {"@type": "Question", "name": "Y a-t-il de la publicité ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Itadaki n'affiche aucune publicité, ni en version gratuite, ni en version Pro."}},
+            {"@type": "Question", "name": "Itadaki existe-t-il sur iPhone ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas pour le moment : Itadaki est disponible uniquement sur Android, via Google Play."}}
+        ]
     }
     </script>
 
-    <!-- Google Fonts -->
+    <script>document.documentElement.classList.add('js');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #A04D4D;
-            --primary-dark: #7A3B3B;
-            --primary-light: #C4736F;
-            --accent: #E9967A;
-            --background: #FCF9F7;
+            --primary: #924848;
+            --primary-strong: #7A3B3B;
+            --primary-container: #D98281;
+            --on-primary: #FFFFFF;
+            --tint: #FECBC9;
+            --tint-soft: #FFF0EF;
+            --gold: #745B03;
+            --gold-soft: #F6E7B8;
+            --bg: #FFF8F7;
             --surface: #FFFFFF;
-            --text-main: #2D2424;
-            --text-muted: #6B5E5E;
-            --shadow-sm: 0 4px 12px rgba(160, 77, 77, 0.08);
-            --shadow: 0 10px 30px rgba(160, 77, 77, 0.08);
-            --shadow-lg: 0 20px 50px rgba(160, 77, 77, 0.12);
+            --surface-alt: #FAEAE9;
+            --text: #211A19;
+            --text-muted: #5E4E4D;
+            --border: rgba(146, 72, 72, 0.12);
+            --phone-frame: #1E1817;
+            --shadow-sm: 0 4px 14px rgba(146, 72, 72, 0.08);
+            --shadow: 0 14px 40px rgba(146, 72, 72, 0.12);
+            --shadow-lg: 0 30px 70px rgba(90, 29, 31, 0.22);
             --radius: 24px;
             --radius-sm: 16px;
+            color-scheme: light;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --primary: #FFB3B1;
+                --primary-strong: #FFDAD8;
+                --primary-container: #733333;
+                --on-primary: #561D1E;
+                --tint: #5A2A2B;
+                --tint-soft: #2B2020;
+                --gold: #E7C46A;
+                --gold-soft: #3A3018;
+                --bg: #1A1111;
+                --surface: #241A1A;
+                --surface-alt: #2F2424;
+                --text: #F1DEDD;
+                --text-muted: #D4BCBB;
+                --border: rgba(255, 179, 177, 0.14);
+                --phone-frame: #0C0909;
+                --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.3);
+                --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+                --shadow-lg: 0 30px 70px rgba(0, 0, 0, 0.5);
+                color-scheme: dark;
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --primary: #FFB3B1;
+            --primary-strong: #FFDAD8;
+            --primary-container: #733333;
+            --on-primary: #561D1E;
+            --tint: #5A2A2B;
+            --tint-soft: #2B2020;
+            --gold: #E7C46A;
+            --gold-soft: #3A3018;
+            --bg: #1A1111;
+            --surface: #241A1A;
+            --surface-alt: #2F2424;
+            --text: #F1DEDD;
+            --text-muted: #D4BCBB;
+            --border: rgba(255, 179, 177, 0.14);
+            --phone-frame: #0C0909;
+            --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.3);
+            --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 30px 70px rgba(0, 0, 0, 0.5);
+            color-scheme: dark;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
         body {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            background: var(--background);
-            color: var(--text-main);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         h1, h2, h3 {
             font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
         }
 
-        /* --- Header Sticky --- */
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 8px;
+            background: var(--primary);
+            color: var(--on-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            z-index: 200;
+        }
+        .skip-link:focus { left: 8px; }
+
+        :focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        /* --- Header --- */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 1rem 5%;
+            background: color-mix(in srgb, var(--bg) 82%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        header.scrolled { border-bottom-color: var(--border); }
+
+        .nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background: rgba(252, 249, 247, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(160, 77, 77, 0.06);
+            justify-content: space-between;
+            gap: 16px;
+            height: 68px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
-            color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             letter-spacing: -0.5px;
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
             object-fit: cover;
-            box-shadow: 0 2px 8px rgba(160, 77, 77, 0.15);
-            display: block;
+            box-shadow: 0 0 0 1px var(--border), var(--shadow-sm);
         }
 
-        .btn-header {
-            padding: 0.7rem 1.6rem;
-            border-radius: 14px;
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            border-radius: 999px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.88rem;
             background: var(--primary);
-            color: white;
-            transition: all 0.3s ease;
+            color: var(--on-primary);
+        }
+        .btn-sm:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+
+        .btn-play {
+            padding: 0.75rem 1.6rem 0.75rem 1.2rem;
+            background: var(--text);
+            color: var(--bg);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+        .btn-play:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .btn-play svg { width: 28px; height: 28px; flex-shrink: 0; }
+        .btn-play span { display: flex; flex-direction: column; line-height: 1.2; }
+        .btn-play small { font-size: 0.7rem; font-weight: 500; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.06em; }
+        .btn-play strong { font-size: 1.15rem; font-weight: 700; }
+
+        .btn-ghost {
+            padding: 0.85rem 1.4rem;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        .btn-ghost:hover { background: var(--tint-soft); }
+
+        /* --- Hero --- */
+        .hero {
+            position: relative;
+            padding: 64px 0 96px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: -20% -10% auto auto;
+            width: 70%;
+            height: 120%;
+            background: radial-gradient(closest-side, color-mix(in srgb, var(--primary-container) 35%, transparent), transparent);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .btn-header:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(160, 77, 77, 0.25);
-        }
-
-        /* --- Hero Section --- */
-        main { flex: 1; }
-
-        .hero {
-            padding: 80px 5% 60px;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            animation: fadeInUp 0.8s ease-out;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: var(--tint-soft);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
         }
 
         .hero h1 {
-            font-size: clamp(2.4rem, 6vw, 3.8rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
             font-weight: 800;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.045em;
+            margin-bottom: 24px;
         }
 
-        .hero h1 span { color: var(--primary); }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--primary);
+        }
 
-        .hero-tagline {
+        .hero-lead {
             font-size: 1.2rem;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 620px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
+            max-width: 540px;
+            margin-bottom: 36px;
         }
 
         .hero-cta {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             align-items: center;
             gap: 12px;
+            margin-bottom: 32px;
         }
 
-        .btn-primary {
-            padding: 1.1rem 2.5rem;
-            border-radius: 18px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 10px 25px rgba(160, 77, 77, 0.25);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-size: 1.05rem;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            background: var(--primary-dark);
-            box-shadow: 0 15px 35px rgba(160, 77, 77, 0.35);
-        }
-
-        .hero-note {
-            font-size: 0.85rem;
+        .trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+            list-style: none;
             color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 500;
         }
 
-        .hero-bg {
+        .trust li { display: flex; align-items: center; gap: 8px; }
+        .trust svg { color: var(--primary); flex-shrink: 0; }
+
+        .hero-visual {
             position: relative;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
         }
 
-        .hero-bg::before {
+        /* --- Phone mockup --- */
+        .phone {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            height: fit-content;
+            border-radius: 40px;
+            padding: 26px 10px 18px;
+            background: var(--phone-frame);
+            box-shadow: var(--shadow-lg), inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+        }
+
+        .phone::before {
             content: '';
             position: absolute;
-            top: -40%;
-            left: -20%;
-            width: 60%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(160, 77, 77, 0.06) 0%, transparent 70%);
-            pointer-events: none;
+            top: 10px;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            margin-left: -4px;
+            border-radius: 50%;
+            background: #3A3130;
         }
 
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            right: -15%;
-            width: 50%;
-            height: 70%;
-            background: radial-gradient(circle, rgba(233, 150, 122, 0.08) 0%, transparent 70%);
-            pointer-events: none;
+        .phone img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            background: var(--surface-alt);
         }
 
-        /* --- Section Titles --- */
-        .section-title {
+        .phone-sm { max-width: 260px; }
+
+
+        /* --- Sections --- */
+        section { padding: 96px 0; }
+
+        .section-head {
             text-align: center;
-            margin-bottom: 3.5rem;
+            max-width: 640px;
+            margin: 0 auto 56px;
         }
 
-        .section-title h2 {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
+        .kicker {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
             font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 14px;
         }
 
-        .section-title p {
+        .section-head p {
             color: var(--text-muted);
             font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto;
         }
 
-        /* --- How it works --- */
-        .how-it-works {
-            padding: 80px 5%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        /* --- Steps --- */
+        .steps-section { background: var(--surface); border-block: 1px solid var(--border); }
 
         .steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 24px;
+            list-style: none;
             counter-reset: step;
         }
 
         .step {
-            text-align: center;
-            padding: 30px 20px;
             position: relative;
-            animation: fadeInUp 0.6s ease-out backwards;
+            padding: 32px 28px;
+            border-radius: var(--radius);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            counter-increment: step;
         }
 
-        .step:nth-child(1) { animation-delay: 0.1s; }
-        .step:nth-child(2) { animation-delay: 0.2s; }
-        .step:nth-child(3) { animation-delay: 0.3s; }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        .step::before {
+            content: counter(step);
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             background: var(--primary);
-            color: white;
+            color: var(--on-primary);
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             margin-bottom: 20px;
         }
 
-        .step h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .step h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .step p { color: var(--text-muted); font-size: 0.97rem; }
+
+        /* --- Feature showcase --- */
+        .showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
         }
 
-        .step p {
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .feature-row.reverse .feature-text { order: 2; }
+
+        .feature-media {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 40px 20px;
+            border-radius: 32px;
+            background: linear-gradient(160deg, var(--tint-soft), var(--surface-alt));
+            border: 1px solid var(--border);
+        }
+
+        .feature-media .phone:nth-child(2) { margin-top: 48px; }
+
+        .feature-text h3 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .feature-text > p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 1.08rem;
+            margin-bottom: 24px;
         }
 
-        /* --- Features Grid --- */
-        .features {
-            padding: 60px 5% 80px;
-            max-width: 1100px;
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+
+        .tag-free { background: var(--tint-soft); color: var(--primary); border: 1px solid var(--border); }
+        .tag-pro { background: var(--gold-soft); color: var(--gold); }
+
+        .checks {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .checks li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .checks li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            border-radius: 50%;
+            background: var(--primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 13px no-repeat;
+        }
+
+        .checks strong { font-weight: 600; }
+        .checks span { color: var(--text-muted); }
+
+        /* --- Mini features grid --- */
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .mini-card {
+            padding: 28px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mini-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+        .mini-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: var(--tint-soft);
+            color: var(--primary);
+            margin-bottom: 18px;
+        }
+
+        .mini-card h3 { font-size: 1.08rem; margin-bottom: 6px; }
+        .mini-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- Pricing --- */
+        .pricing-section { background: var(--surface); border-block: 1px solid var(--border); }
+
+        .plans {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 920px;
             margin: 0 auto;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+        .plan {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 36px;
+            border-radius: 28px;
+            background: var(--bg);
+            border: 1px solid var(--border);
         }
 
-        .feature-card {
-            padding: 36px 28px;
-            border-radius: var(--radius);
-            background: var(--surface);
-            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid rgba(160, 77, 77, 0.05);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
+        .plan-pro {
+            background: linear-gradient(150deg, #924848, #5A1D1F);
+            color: #FFFFFF;
+            border: none;
             box-shadow: var(--shadow-lg);
         }
 
-        .feature-icon {
-            font-size: 2.4rem;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .feature-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* --- Premium Banner --- */
-        .premium {
-            padding: 80px 5%;
-        }
-
-        .premium-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: var(--radius);
-            padding: 60px 50px;
-            color: white;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(122, 59, 59, 0.25);
-        }
-
-        .premium-inner h2 {
-            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        .plan-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
+            margin-bottom: 4px;
         }
 
-        .premium-list {
-            list-style: none;
-            display: inline-block;
-            text-align: left;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-            line-height: 2;
-        }
+        .plan-sub { color: var(--text-muted); margin-bottom: 28px; }
+        .plan-pro .plan-sub { color: rgba(255, 255, 255, 0.8); }
 
-        .premium-list li::before {
-            content: '✓ ';
-            font-weight: 700;
-            margin-right: 4px;
-        }
+        .plan .checks { margin-bottom: 32px; flex: 1; }
+        .plan-pro .checks li::before { background-color: #FFFFFF; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23924848' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); }
+        .plan-pro .checks span { color: rgba(255, 255, 255, 0.8); }
 
-        .btn-white {
-            padding: 1rem 2.2rem;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
+        .plan-note {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .plan-pro .plan-note { color: rgba(255, 255, 255, 0.75); }
+
+        .no-ads {
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            background: white;
-            color: var(--primary);
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            margin-top: 32px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: center;
         }
 
-        .btn-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        /* --- FAQ --- */
+        .faq {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq details {
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: box-shadow 0.25s ease;
+        }
+
+        .faq details[open] { box-shadow: var(--shadow-sm); }
+
+        .faq summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 20px 24px;
+            font-weight: 600;
+            font-size: 1.02rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .faq summary::-webkit-details-marker { display: none; }
+
+        .faq summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--primary);
+            transition: transform 0.25s ease;
+            line-height: 1;
+        }
+
+        .faq details[open] summary::after { transform: rotate(45deg); }
+
+        .faq details p {
+            padding: 0 24px 22px;
+            color: var(--text-muted);
         }
 
         /* --- Final CTA --- */
-        .final-cta {
-            padding: 80px 5%;
+        .final {
             text-align: center;
+            padding: 80px 24px;
+            border-radius: 36px;
+            background: linear-gradient(160deg, var(--tint-soft), var(--surface-alt));
+            border: 1px solid var(--border);
         }
 
-        .final-cta h2 {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+        .final img {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            margin: 0 auto 24px;
+            box-shadow: 0 0 0 1px var(--border), var(--shadow);
+        }
+
+        .final h2 {
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .final p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        .final .jp {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--primary);
+            font-weight: 700;
         }
 
         /* --- Footer --- */
         footer {
-            padding: 50px 5% 30px;
-            text-align: center;
-            background: white;
-            border-top: 1px solid rgba(160, 77, 77, 0.08);
+            padding: 48px 0 36px;
+            border-top: 1px solid var(--border);
+            margin-top: 96px;
         }
 
-        .footer-tagline {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
         }
 
-        .footer-links { margin-bottom: 20px; }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            list-style: none;
+        }
+
         .footer-links a {
-            margin: 0 14px;
             text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--text-muted);
         }
-
         .footer-links a:hover { color: var(--primary); }
 
         .copyright {
+            width: 100%;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.82rem;
         }
 
-        /* --- Animations --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- Reveal on scroll (only when JS is on) --- */
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+        .js .reveal.visible { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .js .reveal { opacity: 1; transform: none; transition: none; }
         }
 
         /* --- Responsive --- */
-        @media (max-width: 1024px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-lead { margin-left: auto; margin-right: auto; }
+            .hero-cta, .trust { justify-content: center; }
+            .feature-row, .feature-row.reverse { grid-template-columns: 1fr; gap: 36px; }
+            .feature-row.reverse .feature-text { order: 0; }
+            .showcase { gap: 88px; }
+            .mini-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        @media (max-width: 640px) {
-            header {
-                padding: 0.8rem 5%;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-
-            .logo img {
-                width: 34px;
-                height: 34px;
-            }
-
-            .btn-header {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.8rem;
-            }
-
-            .hero {
-                padding: 50px 5% 40px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-tagline {
-                font-size: 1.05rem;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .step {
-                padding: 20px 16px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-card {
-                padding: 28px 22px;
-            }
-
-            .premium-inner {
-                padding: 40px 24px;
-            }
-
-            .premium-list {
-                font-size: 0.95rem;
-            }
+        @media (max-width: 680px) {
+            .container { padding: 0 16px; }
+            section { padding: 72px 0; }
+            .hero { padding: 40px 0 72px; }
+            .hero-lead { font-size: 1.08rem; }
+            .steps, .mini-grid, .plans { grid-template-columns: 1fr; }
+            .phone { max-width: 250px; }
+            .feature-media { padding: 28px 12px; gap: 12px; }
+            .feature-media .phone { max-width: 46%; border-radius: 24px; padding: 16px 6px 12px; }
+            .feature-media .phone::before { top: 5px; width: 6px; height: 6px; margin-left: -3px; }
+            .feature-media .phone img { border-radius: 10px; }
+            .feature-media .phone:only-child { max-width: 230px; border-radius: 36px; padding: 24px 9px 16px; }
+            .feature-media .phone:only-child::before { top: 9px; width: 8px; height: 8px; margin-left: -4px; }
+            .feature-media .phone:only-child img { border-radius: 14px; }
+            .feature-media .phone:nth-child(2) { margin-top: 32px; }
+            .plan { padding: 32px 24px; }
+            .final { padding: 56px 20px; border-radius: 28px; }
+            .btn-sm { padding: 0.55rem 1rem; font-size: 0.82rem; }
         }
     </style>
 </head>
 <body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
-<header>
-    <a href="#" class="logo">
-        <img src="icon.webp" alt="Itadaki — application de planification de repas" width="40" height="40">
-        Itadaki
-    </a>
-    <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
-        Télécharger
-    </a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+</svg>
+
+<header id="top">
+    <div class="container nav">
+        <a href="#top" class="logo">
+            <img src="icon.webp" alt="" width="36" height="36">
+            Itadaki
+        </a>
+        <nav aria-label="Navigation principale">
+            <ul class="nav-links">
+                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                <li><a href="#tarifs">Gratuit &amp; Pro</a></li>
+                <li><a href="#faq">Questions</a></li>
+            </ul>
+        </nav>
+        <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn btn-sm">Télécharger</a>
+    </div>
 </header>
 
-<main>
+<main id="contenu">
     <!-- Hero -->
-    <section class="hero hero-bg">
-        <h1>Planifiez vos repas,<br><span>savourez</span> chaque instant.</h1>
-        <p class="hero-tagline">
-            Fini le stress du &laquo;&nbsp;qu'est-ce qu'on mange ce soir&nbsp;?&nbsp;&raquo;. Itadaki organise vos recettes, planifie votre semaine et génère votre liste de courses en un clic.
-        </p>
-        <div class="hero-cta">
-            <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-primary">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
-                Disponible sur Google Play
-            </a>
-            <p class="hero-note">Gratuit &middot; Version Premium disponible</p>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <span class="eyebrow">« Qu'est-ce qu'on mange ce soir ? »</span>
+                <h1>Le menu de la semaine, <em>en un clic.</em></h1>
+                <p class="hero-lead">
+                    Itadaki compose vos repas à partir de <strong>vos</strong> recettes, prépare la liste de courses classée par rayon et vous rappelle le dîner du soir. Vous n'avez plus qu'à cuisiner.
+                </p>
+                <div class="hero-cta">
+                    <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn btn-play">
+                        <svg aria-hidden="true"><use href="#i-play"/></svg>
+                        <span><small>Disponible sur</small><strong>Google Play</strong></span>
+                    </a>
+                    <a href="#comment" class="btn btn-ghost">Voir comment ça marche ↓</a>
+                </div>
+                <ul class="trust">
+                    <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>Gratuit, planification illimitée</li>
+                    <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>Aucune publicité</li>
+                    <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>Prêt en 30 secondes</li>
+                </ul>
+            </div>
+            <div class="hero-visual">
+                <div class="phone">
+                    <img src="screenshots/planning.webp" alt="Écran Planning d'Itadaki : la semaine du 28 septembre avec un plat illustré pour chaque jour" width="540" height="1164" fetchpriority="high">
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Comment ça marche -->
-    <section class="how-it-works">
-        <div class="section-title">
-            <h2>Comment ça marche</h2>
-            <p>Trois étapes pour des repas organisés, sans prise de tête.</p>
-        </div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Ajoutez vos recettes</h3>
-                <p>Importez depuis le web, Instagram, TikTok, ou photographiez un plat et laissez l'IA faire le reste.</p>
+    <section class="steps-section" id="comment">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Comment ça marche</span>
+                <h2>Trois étapes, et la semaine est réglée</h2>
+                <p>Une fois vos recettes en place, préparer la semaine prend moins d'une minute.</p>
             </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Planifiez votre semaine</h3>
-                <p>Générez un menu automatique, choisissez parmi 4 modes de planification et verrouillez vos repas préférés.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Faites vos courses</h3>
-                <p>Votre liste se génère automatiquement, ingrédients regroupés par rayon. Plus rien à oublier.</p>
-            </div>
+            <ol class="steps">
+                <li class="step reveal">
+                    <h3>Rassemblez vos recettes</h3>
+                    <p>Saisissez-les, importez-les depuis un site, une photo ou un lien Instagram / TikTok. Pas encore de recettes ? Le Starter Pack vous en offre une sélection prête à l'emploi.</p>
+                </li>
+                <li class="step reveal">
+                    <h3>Générez votre semaine</h3>
+                    <p>Dîners, déjeuners et dîners, week-ends ou repas par repas : Itadaki compose le menu, vous vérifiez l'aperçu et vous validez.</p>
+                </li>
+                <li class="step reveal">
+                    <h3>Faites les courses</h3>
+                    <p>Un bouton, et tous les ingrédients partent dans une liste classée par rayon. Cochez au fil des allées, partagez-la si quelqu'un d'autre s'en charge.</p>
+                </li>
+            </ol>
         </div>
     </section>
 
     <!-- Fonctionnalités -->
-    <section class="features">
-        <div class="section-title">
-            <h2>Tout ce qu'il vous faut</h2>
-            <p>Des fonctionnalités pensées pour simplifier votre quotidien en cuisine.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">&#x1F310;</span>
-                <h3>Import intelligent</h3>
-                <p>Importez des recettes depuis n'importe quel site web, Instagram, TikTok, ou par photo grâce à l'IA.</p>
+    <section id="fonctionnalites">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Fonctionnalités</span>
+                <h2>Tout ce qu'il faut, rien de superflu</h2>
+                <p>Pensé pour les semaines chargées, du choix des plats jusqu'au passage en caisse.</p>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">&#x1F4C5;</span>
-                <h3>Planification flexible</h3>
-                <p>4 modes de planification, verrouillage de repas, et génération automatique de menus adaptés à vos envies.</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">&#x1F6D2;</span>
-                <h3>Liste de courses intelligente</h3>
-                <p>Agrégation automatique des ingrédients, classement par rayon, et partage en PDF.</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">&#x1F468;&#x200D;&#x1F373;</span>
-                <h3>Mode cuisine pas à pas</h3>
-                <p>Suivez vos recettes étape par étape avec minuteurs intégrés et écran toujours allumé.</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">&#x2601;&#xFE0F;</span>
-                <h3>Vos données, partout</h3>
-                <p>Sauvegardez sur Google Drive ou WebDAV, exportez en format .itk pour ne rien perdre.</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">&#x2B50;</span>
-                <h3>Organisez à votre façon</h3>
-                <p>Notes, catégories, mots-clés, ajustement des portions : personnalisez chaque recette.</p>
+
+            <div class="showcase">
+                <!-- Génération -->
+                <article class="feature-row reveal">
+                    <div class="feature-text">
+                        <h3>Votre semaine, générée en un clic <span class="tag tag-free">Gratuit</span></h3>
+                        <p>Choisissez ce que vous voulez couvrir, et Itadaki compose le menu à partir de vos recettes. Un aperçu s'affiche avant validation : vous vérifiez, vous régénérez, vous confirmez.</p>
+                        <ul class="checks">
+                            <li><div><strong>4 modes de planification</strong> <span>— dîners, déjeuners et dîners, week-ends, ou sur mesure.</span></div></li>
+                            <li><div><strong>Épinglez ce que vous aimez</strong> <span>et régénérez seulement le reste.</span></div></li>
+                            <li><div><strong>Remplacez ou échangez</strong> <span>une recette avec un autre soir si l'envie n'y est pas.</span></div></li>
+                            <li><div><strong>Sans limite</strong> <span>de générations, même en version gratuite.</span></div></li>
+                        </ul>
+                    </div>
+                    <div class="feature-media">
+                        <div class="phone phone-sm"><img src="screenshots/generate.webp" alt="Choix du mode de génération : dîners uniquement, déjeuners et dîners, week-end ou personnalisé" width="540" height="1164" loading="lazy"></div>
+                        <div class="phone phone-sm"><img src="screenshots/preview.webp" alt="Aperçu des menus avant confirmation, avec un cadenas pour épingler chaque plat" width="540" height="1164" loading="lazy"></div>
+                    </div>
+                </article>
+
+                <!-- Variété -->
+                <article class="feature-row reverse reveal">
+                    <div class="feature-text">
+                        <h3>Jamais deux fois le même menu</h3>
+                        <p>Le générateur ne tire pas au hasard. Il tient compte de ce que vous avez mangé les semaines précédentes et de la saison, pour faire tourner tout votre répertoire au lieu de ressortir toujours les trois mêmes plats.</p>
+                        <ul class="checks">
+                            <li><div><strong>Des plats de saison</strong> <span>qui reviennent au bon moment de l'année.</span></div></li>
+                            <li><div><strong>Une vraie rotation</strong> <span>: les recettes oubliées refont surface.</span></div></li>
+                            <li><div><strong>Complétez la semaine</strong> <span>sans retrouver un plat déjà prévu.</span></div></li>
+                        </ul>
+                    </div>
+                    <div class="feature-media">
+                        <div class="phone phone-sm"><img src="screenshots/planning.webp" alt="Planning de la semaine avec un plat différent chaque jour" width="540" height="1164" loading="lazy"></div>
+                    </div>
+                </article>
+
+                <!-- Courses -->
+                <article class="feature-row reveal">
+                    <div class="feature-text">
+                        <h3>La liste de courses se fait toute seule <span class="tag tag-free">Gratuit</span></h3>
+                        <p>Tous les ingrédients de la semaine, rangés par rayon : légumes, fromages, conserves, épices… Cochez au fur et à mesure, ajoutez vos articles à la volée, créez autant de listes que vous voulez.</p>
+                        <ul class="checks">
+                            <li><div><strong>Mon placard</strong> <span>— sel, huile, farine : Itadaki vous demande s'il faut en racheter au lieu de les ajouter d'office.</span></div></li>
+                            <li><div><strong>Doublons regroupés</strong> <span class="tag tag-pro">Pro</span> <span>— l'oignon de trois recettes tient sur une seule ligne. Le premier regroupement est offert.</span></div></li>
+                            <li><div><strong>Partage en un geste</strong> <span>avec la personne qui fait les courses.</span></div></li>
+                        </ul>
+                    </div>
+                    <div class="feature-media">
+                        <div class="phone phone-sm"><img src="screenshots/pantry.webp" alt="Feuille « Déjà dans votre placard ? » pour décocher les produits de base à racheter" width="540" height="1164" loading="lazy"></div>
+                        <div class="phone phone-sm"><img src="screenshots/merge.webp" alt="Liste de courses classée par rayon, avec la proposition de regrouper les ingrédients en double" width="540" height="1164" loading="lazy"></div>
+                    </div>
+                </article>
+
+
+                <!-- Recettes -->
+                <article class="feature-row reverse reveal">
+                    <div class="feature-text">
+                        <h3>Toutes vos recettes au même endroit</h3>
+                        <p>Le carnet de famille, le blog préféré, la page cornée du magazine, la vidéo vue sur TikTok : tout finit au même endroit, bien rangé et facile à retrouver.</p>
+                        <ul class="checks">
+                            <li><div><strong>Saisie manuelle</strong> <span>illimitée, étape par étape.</span></div></li>
+                            <li><div><strong>Import depuis un site web</strong> <span>— 20 offerts. Une recette incomplète est complétée automatiquement.</span></div></li>
+                            <li><div><strong>Import par photo</strong> <span>d'un livre ou d'un magazine, structuré par l'IA — 3 offerts.</span></div></li>
+                            <li><div><strong>Liens Instagram et TikTok</strong> <span>partagés vers Itadaki et analysés par l'IA.</span></div></li>
+                            <li><div><strong>Catégories, mots-clés, favoris</strong> <span>et une recherche avec filtres.</span></div></li>
+                        </ul>
+                    </div>
+                    <div class="feature-media">
+                        <div class="phone phone-sm"><img src="screenshots/recipes.webp" alt="Bibliothèque de recettes avec photos et temps de préparation" width="540" height="1164" loading="lazy"></div>
+                        <div class="phone phone-sm"><img src="screenshots/import.webp" alt="Ajout d'une recette : saisie manuelle, depuis un site web ou depuis une photo" width="540" height="1164" loading="lazy"></div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Premium -->
-    <section class="premium">
-        <div class="premium-inner">
-            <h2>Libérez tout le potentiel d'Itadaki</h2>
-            <ul class="premium-list">
-                <li>Import illimité de recettes web et réseaux sociaux</li>
-                <li>Import par photo avec reconnaissance IA</li>
-                <li>Sauvegarde cloud Google Drive et WebDAV</li>
-                <li>Export et partage de listes de courses en PDF</li>
-                <li>Mots-clés et filtres avancés</li>
-            </ul>
-            <br>
-            <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-white">
-                Découvrir Premium
+    <!-- Vraie cuisine -->
+    <section style="padding-top: 0">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Au quotidien</span>
+                <h2>Pensé pour la vraie cuisine</h2>
+                <p>Les petits détails qui changent tout, une fois devant les fourneaux.</p>
+            </div>
+            <div class="mini-grid">
+                <div class="mini-card reveal">
+                    <div class="mini-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+                    <h3>Rappel du soir</h3>
+                    <p>Le plat prévu à l'heure de votre choix, et ce qu'il faut anticiper pour demain : décongeler, faire mariner, faire tremper.</p>
+                </div>
+                <div class="mini-card reveal">
+                    <div class="mini-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+                    <h3>Portions recalculées</h3>
+                    <p>Les quantités s'ajustent automatiquement au nombre de convives.</p>
+                </div>
+                <div class="mini-card reveal">
+                    <div class="mini-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg></div>
+                    <h3>Mode Cuisine <span class="tag tag-pro">Pro</span></h3>
+                    <p>La recette en plein écran, étape par étape, avec minuteurs intelligents et ingrédients à portée de main.</p>
+                </div>
+                <div class="mini-card reveal">
+                    <div class="mini-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+                    <h3>Export PDF</h3>
+                    <p>Des fiches recettes imprimables, à partager en un geste.</p>
+                </div>
+                <div class="mini-card reveal">
+                    <div class="mini-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+                    <h3>Sauvegarde par fichier</h3>
+                    <p>Toute votre collection dans un fichier, réimportable à tout moment.</p>
+                </div>
+                <div class="mini-card reveal">
+                    <div class="mini-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+                    <h3>Synchro Google Drive <span class="tag tag-pro">Pro</span></h3>
+                    <p>Votre collection synchronisée automatiquement, pour la retrouver sur un nouveau téléphone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="pricing-section" id="tarifs">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Gratuit &amp; Pro</span>
+                <h2>L'essentiel est gratuit. Vraiment.</h2>
+                <p>Planifier, faire ses courses et cuisiner ne coûte rien. Pro est là pour aller plus loin.</p>
+            </div>
+            <div class="plans">
+                <div class="plan reveal">
+                    <div class="plan-name">Gratuit</div>
+                    <p class="plan-sub">Pour toujours, sans limite de temps</p>
+                    <ul class="checks">
+                        <li><div><strong>Planification illimitée</strong> <span>— tous les modes inclus</span></div></li>
+                        <li><div><strong>Listes de courses</strong> <span>et placard, sans limite</span></div></li>
+                        <li><div><strong>Rappel du soir</strong> <span>et widget d'accueil</span></div></li>
+                        <li><div><strong>Portions, export PDF</strong> <span>et sauvegarde par fichier</span></div></li>
+                        <li><div><strong>20 imports web</strong> <span>et 3 imports photo offerts</span></div></li>
+                    </ul>
+                    <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn btn-sm" style="align-self: flex-start">Commencer gratuitement</a>
+                </div>
+                <div class="plan plan-pro reveal">
+                    <div class="plan-name">Itadaki Pro</div>
+                    <p class="plan-sub">Tout le gratuit, et en plus :</p>
+                    <ul class="checks">
+                        <li><div><strong>Imports illimités</strong> <span>— web, photo et réseaux sociaux</span></div></li>
+                        <li><div><strong>Doublons regroupés</strong> <span>dans la liste de courses</span></div></li>
+                        <li><div><strong>Mode Cuisine</strong> <span>plein écran avec minuteurs</span></div></li>
+                        <li><div><strong>Synchronisation automatique</strong> <span>sur Google Drive</span></div></li>
+                    </ul>
+                    <p class="plan-note">Abonnement mensuel ou annuel, annulable à tout moment depuis Google Play.</p>
+                </div>
+            </div>
+            <p class="no-ads reveal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+                Aucune publicité, ni en version gratuite, ni en version Pro.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Questions fréquentes</span>
+                <h2>Bon à savoir</h2>
+            </div>
+            <div class="faq reveal">
+                <details>
+                    <summary>Itadaki est-il vraiment gratuit ?</summary>
+                    <p>Oui. La planification, les listes de courses, le placard, le rappel du soir, le widget, l'ajustement des portions, l'export PDF, l'organisation de votre carnet et la sauvegarde par fichier sont gratuits et sans limite. Itadaki Pro ajoute les imports illimités, le regroupement des doublons, le Mode Cuisine et la synchronisation Google Drive.</p>
+                </details>
+                <details>
+                    <summary>Je n'ai pas encore de recettes, comment je commence ?</summary>
+                    <p>Le Starter Pack vous propose une sélection de recettes prêtes à l'emploi pour générer votre premier menu tout de suite. Vous pourrez les retirer plus tard ; celles que vous avez notées ou planifiées sont conservées.</p>
+                </details>
+                <details>
+                    <summary>Comment fonctionne l'import par IA ?</summary>
+                    <p>Prenez en photo la page d'un livre ou d'un magazine, ou partagez un lien Instagram ou TikTok vers Itadaki : l'IA en extrait les ingrédients et les étapes. Si la source est incomplète, Itadaki complète automatiquement ce qui manque.</p>
+                </details>
+                <details>
+                    <summary>Que se passe-t-il si je change de téléphone ?</summary>
+                    <p>Exportez votre collection dans un fichier et réimportez-la sur le nouveau téléphone, gratuitement. Avec Pro, la synchronisation Google Drive s'en charge automatiquement.</p>
+                </details>
+                <details>
+                    <summary>Comment résilier l'abonnement Pro ?</summary>
+                    <p>Depuis Google Play, à tout moment : Profil → Paiements et abonnements → Abonnements → Itadaki. Vous gardez l'accès Pro jusqu'à la fin de la période payée.</p>
+                </details>
+                <details>
+                    <summary>Itadaki existe-t-il sur iPhone ?</summary>
+                    <p>Pas pour le moment : Itadaki est disponible uniquement sur Android, via Google Play.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA final -->
+    <div class="container">
+        <div class="final reveal">
+            <img src="icon.webp" alt="" width="72" height="72">
+            <h2>Prêt à ne plus vous poser la question ?</h2>
+            <p>Installez Itadaki et générez votre premier menu en 30 secondes. <span class="jp">Itadakimasu !</span></p>
+            <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn btn-play">
+                <svg aria-hidden="true"><use href="#i-play"/></svg>
+                <span><small>Disponible sur</small><strong>Google Play</strong></span>
             </a>
         </div>
-    </section>
-
-    <!-- CTA Final -->
-    <section class="final-cta">
-        <h2>Prêt à simplifier vos repas ?</h2>
-        <a href="https://play.google.com/store/apps/details?id=com.axel.legue.itadaki" class="btn-primary">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.382.218-.72.61-.92zm.96-.752l11.265 6.33-2.978 2.978L3.61 1.062h.002l.958-.001zm11.265 15.606L4.57 22.998l9.247-9.248 2.018 2.018v1.6zm1.792-1.006L20.4 13.8c.598-.336.598-1.264 0-1.6l-2.773-1.558-2.488 2.488 2.488 2.532z"/></svg>
-            Télécharger sur Google Play
-        </a>
-    </section>
+    </div>
 </main>
 
 <footer>
-    <p class="footer-tagline">Fait avec &#10084;&#65039; pour les gourmets organisés</p>
-    <div class="footer-links">
-        <a href="privacy.html">Confidentialité</a>
-        <a href="legal.html">Mentions Légales</a>
-        <a href="mailto:itadaki.app@gmail.com">Contact</a>
+    <div class="container footer-inner">
+        <a href="#top" class="logo">
+            <img src="icon.webp" alt="" width="36" height="36">
+            Itadaki
+        </a>
+        <ul class="footer-links">
+            <li><a href="privacy.html">Confidentialité</a></li>
+            <li><a href="legal.html">Mentions légales</a></li>
+            <li><a href="mailto:itadaki.app@gmail.com">Contact</a></li>
+        </ul>
+        <p class="copyright">&copy; 2025–2026 Itadaki. Fait avec soin pour celles et ceux qui aiment bien manger sans y penser toute la semaine.</p>
     </div>
-    <p class="copyright">&copy; 2025 Itadaki. Tous droits réservés.</p>
 </footer>
 
+<script>
+    const header = document.querySelector('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        items.forEach((el) => io.observe(el));
+    } else {
+        items.forEach((el) => el.classList.add('visible'));
+    }
+</script>
 </body>
 </html>
