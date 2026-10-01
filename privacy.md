@@ -38,14 +38,13 @@ Tu peux exporter ou sauvegarder tes données :
 Ces sauvegardes sont transmises directement de ton appareil vers le service choisi ; l’éditeur n’y a pas accès. Leur conservation relève de ce service et de toi.
 
 ### 3.4 Données collectées automatiquement
-- **Diagnostic (Firebase Crashlytics)** : rapports de plantage et rapports d’erreurs non bloquantes (ex. échec d’un achat, d’une connexion ou d’un import par IA), trace technique, modèle d’appareil, version d’Android et de l’application, ainsi que des informations techniques utiles au diagnostic (statut d’abonnement, origine de l’installation, version du Play Store).
-- **Statistiques d’usage (Google Analytics for Firebase)** : identifiant d’instance de l’application, informations techniques et événements liés à l’offre premium (affichage de l’écran d’abonnement, début, réussite ou échec d’un achat, fonctionnalité premium bloquée), ainsi que les événements collectés automatiquement par le SDK (ex. première ouverture, durée de session).
-- **Identifiant de compte** : si tu es connecté, les rapports de diagnostic et les statistiques d’usage sont associés à l’**identifiant technique de ton compte** (jamais à ton e-mail ni à ton nom), afin de pouvoir retrouver et corriger un problème que tu nous signales.
+- **Diagnostic (Firebase Crashlytics)** : rapports de plantage et rapports d’erreurs non bloquantes (ex. échec d’un achat, d’une connexion ou d’un import par IA), trace technique, modèle d’appareil, version d’Android et de l’application, ainsi que des informations techniques utiles au diagnostic (statut d’abonnement, origine de l’installation, version du Play Store) et le parcours dans l’écran d’abonnement (affichage, début, réussite ou échec d’un achat) qui précède l’erreur.
+- **Identifiant de compte** : si tu es connecté, les rapports de diagnostic sont associés à l’**identifiant technique de ton compte** (jamais à ton e-mail ni à ton nom), afin de pouvoir retrouver et corriger un problème que tu nous signales.
 - **Achats (Google Play Billing)** : statut de ton abonnement et informations de transaction, gérés par Google Play. L’éditeur ne reçoit **jamais** tes coordonnées bancaires.
 - **Protection du service (Firebase App Check / Play Integrity)** : vérification que les requêtes proviennent bien de l’application authentique, afin d’éviter les abus des services d’IA.
 - **Configuration à distance (Firebase Remote Config)** : récupération de paramètres techniques de l’application (ex. choix du modèle d’IA).
 
-L’application **n’affiche pas de publicité** et ne vend pas tes données.
+L’application **n’affiche pas de publicité**, n’utilise **aucun outil de mesure d’audience** ni traceur publicitaire, et ne vend pas tes données.
 
 ## 4) Finalités et bases légales (RGPD)
 
@@ -58,11 +57,10 @@ L’application **n’affiche pas de publicité** et ne vend pas tes données.
 | Gérer les abonnements | Statut d’abonnement, transactions | Exécution du contrat et obligations légales |
 | Corriger les bugs et assurer la stabilité | Données de diagnostic | Intérêt légitime |
 | Protéger le service contre les abus | Données d’intégrité de l’appareil et de l’app | Intérêt légitime |
-| Mesurer l’usage et améliorer l’offre | Statistiques d’usage | Consentement lorsque requis, sinon intérêt légitime |
 
 ## 5) Destinataires et sous-traitants
 Nous ne vendons ni ne louons tes données. Elles peuvent être traitées par :
-- **Google Firebase** (Authentication, Cloud Firestore, Crashlytics, Analytics, App Check, Remote Config, Firebase AI Logic) ;
+- **Google Firebase** (Authentication, Cloud Firestore, Crashlytics, App Check, Remote Config, Firebase AI Logic) ;
 - **Google Cloud** (Cloud Functions, région europe-west1, et API Gemini via Vertex AI) pour l’import par IA et la connexion par e-mail ;
 - **Google** (API Gemini, via Firebase AI Logic) pour l’import par IA ;
 - **Brevo** (France) pour l’envoi des codes de connexion par e-mail ;
@@ -86,7 +84,6 @@ Lorsque tu déclenches un import par IA :
 - **Compte, compteurs d’utilisation et empreinte de l’adresse e-mail** (si tu t’es connecté) : jusqu’à la suppression de ton compte sur demande (voir section 8).
 - **Codes de connexion par e-mail** : 24 heures au plus.
 - **Données de diagnostic (Crashlytics)** : 90 jours.
-- **Statistiques d’usage (Analytics)** : selon la durée de conservation configurée dans Google Analytics (entre 2 et 14 mois).
 - **Achats et abonnements** : selon les règles de Google Play et les obligations légales (comptables notamment).
 - **Sauvegardes Drive / WebDAV** : tant que tu les conserves sur le service choisi.
 
